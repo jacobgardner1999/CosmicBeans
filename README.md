@@ -1,0 +1,3 @@
+# Cosmic Beans
+
+## Initial Idea
