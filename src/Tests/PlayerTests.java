@@ -3,6 +3,7 @@ package Tests;
 import Components.Choice;
 import Components.Game;
 import Components.Option;
+import Helpers.InsufficientTraitException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
