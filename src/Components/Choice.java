@@ -14,5 +14,4 @@ public class Choice {
     public String getChoiceText() {
         return choiceText;
     }
-
 }

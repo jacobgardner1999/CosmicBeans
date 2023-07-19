@@ -1,7 +1,13 @@
 package Tests;
 
+import Components.Choice;
 import Components.Game;
+import Components.Option;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTests {
@@ -23,5 +29,18 @@ public class PlayerTests {
 
         String choiceText = "You walk into town to get a coffee";
         assertEquals(choiceText, game.player.getCurrentChoice().getChoiceText());
+    }
+
+    @Test
+    void ChoiceUpdatesPlayerTrait() {
+        Game game = new Game();
+        HashMap<String, Integer> optionTraits= new HashMap<>();
+        optionTraits.put("Perception", 5);
+        Option option = new Option("Option 1", null, optionTraits);
+        Choice choice = new Choice("Choice", List.of(option));
+
+        game.giveChoice(choice);
+        game.player.makeChoice(0);
+        assertEquals(25, game.player.getPlayerTraits("Perception"));
     }
 }
