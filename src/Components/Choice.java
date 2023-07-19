@@ -3,8 +3,8 @@ package Components;
 import java.util.List;
 
 public class Choice {
-    private String choiceText;
-    private List<Option> optionsList;
+    private final String choiceText;
+    public List<Option> optionsList;
 
     public Choice(String choiceText, List<Option> optionsList) {
         this.choiceText = choiceText;
@@ -15,7 +15,4 @@ public class Choice {
         return choiceText;
     }
 
-    public List<Option> getOptionsList() {
-        return optionsList;
-    }
 }

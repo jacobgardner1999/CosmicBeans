@@ -10,4 +10,8 @@ public class Player {
     public Choice getCurrentChoice() {
         return currentChoice;
     }
+
+    public void makeChoice(int optionIndex) {
+        currentChoice = currentChoice.optionsList.get(optionIndex).choiceDestination;
+    }
 }

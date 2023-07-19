@@ -12,6 +12,16 @@ public class PlayerTests {
         game.startGame();
 
         String choiceText = "Your alarm blares. 6:25";
-        assertEquals(game.getPlayer().getCurrentChoice().getChoiceText(), choiceText);
+        assertEquals(choiceText, game.player.getCurrentChoice().getChoiceText());
+    }
+
+    @Test
+    void PlayerGivenNewChoiceOnMakeChoice() {
+        Game game = new Game();
+        game.startGame();
+        game.player.makeChoice(0);
+
+        String choiceText = "You walk into town to get a coffee";
+        assertEquals(choiceText, game.player.getCurrentChoice().getChoiceText());
     }
 }
