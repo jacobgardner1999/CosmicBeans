@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerTests {
 
@@ -42,5 +43,20 @@ public class PlayerTests {
         game.giveChoice(choice);
         game.player.makeChoice(0);
         assertEquals(25, game.player.getPlayerTraits("Perception"));
+    }
+
+    @Test
+    void OptionNotAvailableBasedOnPlayerTrait() {
+        Game game = new Game();
+        HashMap<String, Integer> traitRequirement= new HashMap<>();
+        traitRequirement.put("Perception", 5);
+        Option option = new Option("Option 1", null, null, traitRequirement);
+        Choice choice = new Choice("Choice", List.of(option));
+
+        game.giveChoice(choice);
+
+        assertThrows(InsufficientTraitException.class, () -> {
+            game.player.makeChoice(0);
+        });
     }
 }
