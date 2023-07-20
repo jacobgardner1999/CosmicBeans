@@ -35,7 +35,7 @@ public class PlayerTests {
     @Test
     public void ChoiceUpdatesPlayerTrait() {
         Game game = new Game();
-        Traits optionTraits= new Traits(5);
+        Traits optionTraits= new Traits(5, 0, 0, 0);
         Option option = new Option("Option 1", null, optionTraits, new Traits());
         Choice choice = new Choice("Choice", List.of(option));
 
@@ -47,7 +47,7 @@ public class PlayerTests {
     @Test
     public void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
-        Traits traitRequirement = new Traits(50);
+        Traits traitRequirement = new Traits(50, 0, 0, 0);
 
         Choice badChoice = new Choice("Un-choosable", null);
 
@@ -68,11 +68,16 @@ public class PlayerTests {
 
         Choice destination = new Choice("Expected result", null);
 
-        Option option = new Option("Option 1", destination, new Traits(30, 25, 60, 10), traitRequirement);
+        Option option1 = new Option("Option 1", destination, new Traits(), traitRequirement);
+        Choice choice1 = new Choice("Second Choice", List.of(option1));
+
+        Option option = new Option("Option 1", choice1, new Traits(30, 25, 60, 10), new Traits());
         Choice choice = new Choice("First Choice", List.of(option));
 
         game.giveChoice(choice);
         game.player.makeChoice(0);
+        game.player.makeChoice(0);
+
 
         assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo("Expected result");
     }

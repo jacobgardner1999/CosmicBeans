@@ -6,8 +6,11 @@ public class Player {
     private Choice currentChoice;
     private final Traits playerTraits;
 
+    public Player(Traits playerTraits) {
+        this.playerTraits = playerTraits;
+    }
     public Player() {
-        this.playerTraits = new Traits(20);
+        this.playerTraits = new Traits(20, 20, 20, 20);
     }
 
     public void setCurrentChoice(Choice choice) {
