@@ -4,10 +4,12 @@ import Components.Choice;
 import Components.Game;
 import Components.Option;
 import Components.Traits;
+import Helpers.InsufficientTraitException;
 import org.junit.Test;
 
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class PlayerTests {
 
@@ -48,11 +50,14 @@ public class PlayerTests {
         Traits traitRequirement= new Traits(50);
 
         Choice badChoice = new Choice("Un-choosable", null);
-        Option option = new Option("Option 1", badChoice, null, traitRequirement);
+
+        Option option = new Option("Option 1", badChoice, new Traits(), traitRequirement);
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(choice);
 
-        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo("Choice");
+        assertThatExceptionOfType(InsufficientTraitException.class)
+                .isThrownBy(() -> game.player.makeChoice(0))
+                .withMessage("Insufficient trait value.");
     }
 }

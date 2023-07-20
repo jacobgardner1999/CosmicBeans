@@ -7,8 +7,15 @@ public class Traits {
         this.perception = perception;
     }
 
+    public Traits () {
+        this.perception = 0;
+    }
     public Integer getPerception() {
         return perception;
+    }
+
+    public boolean checkValid(Traits traits) {
+        return traits.perception >= perception;
     }
 
     public void updateTraits(Traits traits) {

@@ -1,5 +1,7 @@
 package Components;
 
+import Helpers.InsufficientTraitException;
+
 public class Player {
     private Choice currentChoice;
     private final Traits playerTraits;
@@ -18,8 +20,11 @@ public class Player {
 
     public void makeChoice(int optionIndex) {
         Option option = currentChoice.optionsList.get(optionIndex);
-        currentChoice = option.choiceDestination;
-        updateTraits(option.traitScore);
+        if(option.traitRequirement.checkValid(playerTraits)) {
+            currentChoice = option.choiceDestination;
+            updateTraits(option.traitScore);
+        }
+        throw new InsufficientTraitException("Insufficient trait value.");
     }
 
     private void updateTraits(Traits traitScore) {
