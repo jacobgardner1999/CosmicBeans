@@ -1,9 +1,6 @@
 package Tests;
 
-import Components.Choice;
-import Components.Game;
-import Components.Option;
-import Components.Traits;
+import Components.*;
 import Helpers.InsufficientTraitException;
 import org.junit.Test;
 
@@ -16,37 +13,44 @@ public class PlayerTests {
     @Test
     public void StartGameInstance() {
         Game game = new Game();
-        game.startGame();
+        Player player = new Player();
+        game.startGame(player);
 
         String choiceText = "Your alarm blares. 6:25";
-        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
+        assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
     @Test
     public void PlayerGivenNewChoiceOnMakeChoice() {
         Game game = new Game();
-        game.startGame();
-        game.player.makeChoice(0);
+        Player player = new Player();
+        game.startGame(player);
+        player.makeChoice(0);
 
         String choiceText = "You walk into town to get a coffee";
-        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
+        assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
     @Test
     public void ChoiceUpdatesPlayerTrait() {
         Game game = new Game();
-        Traits optionTraits= new Traits(5, 0, 0, 0);
+        Player player = new Player();
+        Traits optionTraits= new Traits(5, 10, 5, 0);
         Option option = new Option("Option 1", null, optionTraits, new Traits());
         Choice choice = new Choice("Choice", List.of(option));
 
-        game.giveChoice(choice);
-        game.player.makeChoice(0);
-        assertThat(game.player.getPerception()).isEqualTo(25);
+        game.giveChoice(player, choice);
+        player.makeChoice(0);
+        assertThat(player.getPlayerTraits().getPerception()).isEqualTo(25);
+        assertThat(player.getPlayerTraits().getHustle()).isEqualTo(30);
+        assertThat(player.getPlayerTraits().getCharisma()).isEqualTo(25);
+        assertThat(player.getPlayerTraits().getSnootiness()).isEqualTo(20);
     }
 
     @Test
     public void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
+        Player player = new Player();
         Traits traitRequirement = new Traits(50, 0, 0, 0);
 
         Choice badChoice = new Choice("Un-choosable", null);
@@ -54,31 +58,27 @@ public class PlayerTests {
         Option option = new Option("Option 1", badChoice, new Traits(), traitRequirement);
         Choice choice = new Choice("Choice", List.of(option));
 
-        game.giveChoice(choice);
+        game.giveChoice(player, choice);
 
         assertThatExceptionOfType(InsufficientTraitException.class)
-                .isThrownBy(() -> game.player.makeChoice(0))
+                .isThrownBy(() -> player.makeChoice(0))
                 .withMessage("Insufficient trait value.");
     }
 
     @Test
     public void PlayerMakesChoiceWithMultipleRequirements() {
         Game game = new Game();
+        Player player = new Player(new Traits(50, 45, 80, 30));
         Traits traitRequirement = new Traits(50, 45, 80, 30);
 
         Choice destination = new Choice("Expected result", null);
 
-        Option option1 = new Option("Option 1", destination, new Traits(), traitRequirement);
-        Choice choice1 = new Choice("Second Choice", List.of(option1));
+        Option option = new Option("Option 1", destination, new Traits(), traitRequirement);
+        Choice choice = new Choice("Second Choice", List.of(option));
 
-        Option option = new Option("Option 1", choice1, new Traits(30, 25, 60, 10), new Traits());
-        Choice choice = new Choice("First Choice", List.of(option));
+        game.giveChoice(player, choice);
+        player.makeChoice(0);
 
-        game.giveChoice(choice);
-        game.player.makeChoice(0);
-        game.player.makeChoice(0);
-
-
-        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo("Expected result");
+        assertThat(player.getCurrentChoiceText()).isEqualTo("Expected result");
     }
 }

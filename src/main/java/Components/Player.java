@@ -21,6 +21,8 @@ public class Player {
         return currentChoice;
     }
 
+    public String getCurrentChoiceText() { return currentChoice.getChoiceText(); }
+
     public void makeChoice(int optionIndex) {
         Option option = currentChoice.getOption(optionIndex);
         if(option.traitRequirement.checkValid(playerTraits)) {
@@ -31,11 +33,11 @@ public class Player {
             throw new InsufficientTraitException("Insufficient trait value.");
     }
 
-    private void updateTraits(Traits traitScore) {
-        playerTraits.updateTraits(traitScore);
+    public Traits getPlayerTraits() {
+        return playerTraits;
     }
 
-    public Integer getPerception() {
-        return playerTraits.getPerception();
+    private void updateTraits(Traits traitScore) {
+        playerTraits.updateTraits(traitScore);
     }
 }
