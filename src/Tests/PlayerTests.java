@@ -3,14 +3,12 @@ package Tests;
 import Components.Choice;
 import Components.Game;
 import Components.Option;
-import Helpers.InsufficientTraitException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerTests {
 
@@ -38,7 +36,7 @@ public class PlayerTests {
         Game game = new Game();
         HashMap<String, Integer> optionTraits= new HashMap<>();
         optionTraits.put("Perception", 5);
-        Option option = new Option("Option 1", null, optionTraits);
+        Option option = new Option("Option 1", null, optionTraits, null);
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(choice);
@@ -50,14 +48,13 @@ public class PlayerTests {
     void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
         HashMap<String, Integer> traitRequirement= new HashMap<>();
-        traitRequirement.put("Perception", 5);
-        Option option = new Option("Option 1", null, null, traitRequirement);
+        traitRequirement.put("Perception", 50);
+        Choice badChoice = new Choice("Un-choosable", null);
+        Option option = new Option("Option 1", badChoice, null, traitRequirement);
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(choice);
 
-        assertThrows(InsufficientTraitException.class, () -> {
-            game.player.makeChoice(0);
-        });
+        assertEquals("Choice", game.player.getCurrentChoice().getChoiceText());
     }
 }

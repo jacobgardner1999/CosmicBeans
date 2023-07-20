@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Player {
     private Choice currentChoice;
-    private HashMap<String, Integer> playerTraits = new HashMap<>();
+    private final HashMap<String, Integer> playerTraits = new HashMap<>();
 
     public Player() {
         this.playerTraits.put("Perception", 20);
@@ -20,6 +20,14 @@ public class Player {
 
     public void makeChoice(int optionIndex) {
         Option option = currentChoice.optionsList.get(optionIndex);
+        if(option.traitRequirement != null) {
+            option.traitRequirement.forEach((key, value) -> {
+                if (playerTraits.get(key) < value) {
+                    return;
+                    }
+                }
+            );
+        }
         currentChoice = option.choiceDestination;
         updateTraits(option.traitScore);
     }
