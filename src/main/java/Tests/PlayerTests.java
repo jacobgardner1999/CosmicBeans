@@ -36,7 +36,7 @@ public class PlayerTests {
     public void ChoiceUpdatesPlayerTrait() {
         Game game = new Game();
         Traits optionTraits= new Traits(5);
-        Option option = new Option("Option 1", null, optionTraits, null);
+        Option option = new Option("Option 1", null, optionTraits, new Traits());
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(choice);

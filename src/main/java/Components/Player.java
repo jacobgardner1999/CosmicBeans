@@ -19,12 +19,13 @@ public class Player {
     }
 
     public void makeChoice(int optionIndex) {
-        Option option = currentChoice.optionsList.get(optionIndex);
+        Option option = currentChoice.getOption(optionIndex);
         if(option.traitRequirement.checkValid(playerTraits)) {
             currentChoice = option.choiceDestination;
             updateTraits(option.traitScore);
         }
-        throw new InsufficientTraitException("Insufficient trait value.");
+        else
+            throw new InsufficientTraitException("Insufficient trait value.");
     }
 
     private void updateTraits(Traits traitScore) {
