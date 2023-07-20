@@ -47,7 +47,7 @@ public class PlayerTests {
     @Test
     public void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
-        Traits traitRequirement= new Traits(50);
+        Traits traitRequirement = new Traits(50);
 
         Choice badChoice = new Choice("Un-choosable", null);
 
@@ -59,5 +59,21 @@ public class PlayerTests {
         assertThatExceptionOfType(InsufficientTraitException.class)
                 .isThrownBy(() -> game.player.makeChoice(0))
                 .withMessage("Insufficient trait value.");
+    }
+
+    @Test
+    public void PlayerMakesChoiceWithMultipleRequirements() {
+        Game game = new Game();
+        Traits traitRequirement = new Traits(50, 45, 80, 30);
+
+        Choice destination = new Choice("Expected result", null);
+
+        Option option = new Option("Option 1", destination, new Traits(30, 25, 60, 10), traitRequirement);
+        Choice choice = new Choice("First Choice", List.of(option));
+
+        game.giveChoice(choice);
+        game.player.makeChoice(0);
+
+        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo("Expected result");
     }
 }
