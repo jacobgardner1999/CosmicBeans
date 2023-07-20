@@ -3,9 +3,8 @@ package Tests;
 import Components.Choice;
 import Components.Game;
 import Components.Option;
+import Components.Traits;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,21 +33,20 @@ public class PlayerTests {
     @Test
     void ChoiceUpdatesPlayerTrait() {
         Game game = new Game();
-        HashMap<String, Integer> optionTraits= new HashMap<>();
-        optionTraits.put("Perception", 5);
+        Traits optionTraits= new Traits(5);
         Option option = new Option("Option 1", null, optionTraits, null);
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(choice);
         game.player.makeChoice(0);
-        assertEquals(25, game.player.getPlayerTraits("Perception"));
+        assertEquals(25, game.player.getPerception());
     }
 
     @Test
     void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
-        HashMap<String, Integer> traitRequirement= new HashMap<>();
-        traitRequirement.put("Perception", 50);
+        Traits traitRequirement= new Traits(50);
+
         Choice badChoice = new Choice("Un-choosable", null);
         Option option = new Option("Option 1", badChoice, null, traitRequirement);
         Choice choice = new Choice("Choice", List.of(option));
