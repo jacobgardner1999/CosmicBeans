@@ -4,34 +4,34 @@ import Components.Choice;
 import Components.Game;
 import Components.Option;
 import Components.Traits;
-import org.junit.jupiter.api.Test;
-import java.util.List;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerTests {
 
     @Test
-    void StartGameInstance() {
+    public void StartGameInstance() {
         Game game = new Game();
         game.startGame();
 
         String choiceText = "Your alarm blares. 6:25";
-        assertEquals(choiceText, game.player.getCurrentChoice().getChoiceText());
+        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
     @Test
-    void PlayerGivenNewChoiceOnMakeChoice() {
+    public void PlayerGivenNewChoiceOnMakeChoice() {
         Game game = new Game();
         game.startGame();
         game.player.makeChoice(0);
 
         String choiceText = "You walk into town to get a coffee";
-        assertEquals(choiceText, game.player.getCurrentChoice().getChoiceText());
+        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
     @Test
-    void ChoiceUpdatesPlayerTrait() {
+    public void ChoiceUpdatesPlayerTrait() {
         Game game = new Game();
         Traits optionTraits= new Traits(5);
         Option option = new Option("Option 1", null, optionTraits, null);
@@ -39,11 +39,11 @@ public class PlayerTests {
 
         game.giveChoice(choice);
         game.player.makeChoice(0);
-        assertEquals(25, game.player.getPerception());
+        assertThat(game.player.getPerception()).isEqualTo(25);
     }
 
     @Test
-    void OptionNotAvailableBasedOnPlayerTrait() {
+    public void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
         Traits traitRequirement= new Traits(50);
 
@@ -53,6 +53,6 @@ public class PlayerTests {
 
         game.giveChoice(choice);
 
-        assertEquals("Choice", game.player.getCurrentChoice().getChoiceText());
+        assertThat(game.player.getCurrentChoice().getChoiceText()).isEqualTo("Choice");
     }
 }
