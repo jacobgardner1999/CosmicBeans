@@ -5,6 +5,7 @@ import Helpers.InsufficientTraitException;
 import org.junit.Test;
 
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -35,8 +36,9 @@ public class PlayerTests {
     public void ChoiceUpdatesPlayerTrait() {
         Game game = new Game();
         Player player = new Player();
-        Traits optionTraits= new Traits(5, 10, 5, 0);
-        Option option = new Option("Option 1", null, optionTraits, new Traits());
+        OptionFactory factory = new OptionFactory();
+        Traits optionTraits = new Traits(5, 10, 5, 0);
+        Option option = factory.createOption("Option 1", null, optionTraits, new Traits());
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(player, choice);
@@ -50,12 +52,13 @@ public class PlayerTests {
     @Test
     public void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
+        OptionFactory factory = new OptionFactory();
         Player player = new Player();
         Traits traitRequirement = new Traits(50, 0, 0, 0);
 
         Choice badChoice = new Choice("Un-choosable", null);
 
-        Option option = new Option("Option 1", badChoice, new Traits(), traitRequirement);
+        Option option = factory.createOption("Option 1", badChoice, new Traits(), traitRequirement);
         Choice choice = new Choice("Choice", List.of(option));
 
         game.giveChoice(player, choice);
@@ -68,12 +71,13 @@ public class PlayerTests {
     @Test
     public void PlayerMakesChoiceWithMultipleRequirements() {
         Game game = new Game();
+        OptionFactory factory = new OptionFactory();
         Player player = new Player(new Traits(50, 45, 80, 30));
         Traits traitRequirement = new Traits(50, 45, 80, 30);
 
         Choice destination = new Choice("Expected result", null);
 
-        Option option = new Option("Option 1", destination, new Traits(), traitRequirement);
+        Option option = factory.createOption("Option 1", destination, new Traits(), traitRequirement);
         Choice choice = new Choice("Second Choice", List.of(option));
 
         game.giveChoice(player, choice);
@@ -81,4 +85,5 @@ public class PlayerTests {
 
         assertThat(player.getCurrentChoiceText()).isEqualTo("Expected result");
     }
+
 }
