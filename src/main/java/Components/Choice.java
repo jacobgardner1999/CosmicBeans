@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Choice {
     private final String choiceText;
-    private List<Option> optionsList;
+    private final List<Option> optionsList;
 
     public Choice(String choiceText, List<Option> optionsList) {
         this.choiceText = choiceText;
