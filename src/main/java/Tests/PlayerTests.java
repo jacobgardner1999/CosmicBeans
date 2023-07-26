@@ -37,9 +37,10 @@ public class PlayerTests {
         Game game = new Game();
         Player player = new Player();
         OptionFactory factory = new OptionFactory();
+        ChoiceFactory choiceFactory = new ChoiceFactory();
         Traits optionTraits = new Traits(5, 10, 5, 0);
         Option option = factory.createOption("Option 1", null, optionTraits, new Traits());
-        Choice choice = new Choice("Choice", List.of(option));
+        Choice choice = choiceFactory.createChoice("Choice", List.of(option));
 
         game.giveChoice(player, choice);
         player.makeChoice(0);
@@ -53,13 +54,14 @@ public class PlayerTests {
     public void OptionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
         OptionFactory factory = new OptionFactory();
+        ChoiceFactory choiceFactory = new ChoiceFactory();
         Player player = new Player();
         Traits traitRequirement = new Traits(50, 0, 0, 0);
 
-        Choice badChoice = new Choice("Un-choosable", null);
+        Choice badChoice = choiceFactory.createEndChoice("Un-choosable");
 
         Option option = factory.createOption("Option 1", badChoice, new Traits(), traitRequirement);
-        Choice choice = new Choice("Choice", List.of(option));
+        Choice choice = choiceFactory.createChoice("Choice", List.of(option));
 
         game.giveChoice(player, choice);
 
@@ -72,13 +74,14 @@ public class PlayerTests {
     public void PlayerMakesChoiceWithMultipleRequirements() {
         Game game = new Game();
         OptionFactory factory = new OptionFactory();
+        ChoiceFactory choiceFactory = new ChoiceFactory();
         Player player = new Player(new Traits(50, 45, 80, 30));
         Traits traitRequirement = new Traits(50, 45, 80, 30);
 
-        Choice destination = new Choice("Expected result", null);
+        Choice destination = choiceFactory.createEndChoice("Expected result");
 
         Option option = factory.createOption("Option 1", destination, new Traits(), traitRequirement);
-        Choice choice = new Choice("Second Choice", List.of(option));
+        Choice choice = choiceFactory.createChoice("Second Choice", List.of(option));
 
         game.giveChoice(player, choice);
         player.makeChoice(0);
