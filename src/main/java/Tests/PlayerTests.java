@@ -17,7 +17,7 @@ public class PlayerTests {
         Player player = new Player();
         game.startGame(player);
 
-        String choiceText = "Your alarm blares. 6:25";
+        String choiceText = "Your alarm blares. 6:25.";
         assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
@@ -28,7 +28,7 @@ public class PlayerTests {
         game.startGame(player);
         player.makeChoice(0);
 
-        String choiceText = "You walk into town to get a coffee";
+        String choiceText = "You walk into town to get a coffee.";
         assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
