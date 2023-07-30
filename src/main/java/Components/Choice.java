@@ -10,7 +10,9 @@ public class Choice {
         this.choiceText = choiceText;
         this.optionsList = optionsList;
     }
-
+    public List<Option> getOptionsList() {
+        return optionsList;
+    }
     public Option getOption(int optionIndex) {
         return optionsList.get(optionIndex);
     }

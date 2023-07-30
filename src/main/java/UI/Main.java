@@ -1,6 +1,12 @@
 package UI;
+import Components.Game;
 import Components.Option;
+import Components.Player;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.util.StringConverter;
@@ -10,6 +16,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 
 public class Main extends Application{
     public static void main(String[] args) {
@@ -17,16 +25,28 @@ public class Main extends Application{
     }
     @Override
     public void start(Stage primaryStage) {
-        Text mainText = new Text("<CHOICE TEXT>");
+        Player player = new Player();
+        Game game = new Game();
+
+        game.setupGame(player);
+
         Button button = new Button("GO!");
 
-        Option placeholder = new Option("<CHOOSE AN OPTION>", null);
-        Option option1 = new Option("Option 1", null);
-        Option option2 = new Option("Option 2", null);
-        Option option3 = new Option("Option 3", null);
+        Text mainText = new Text();
+        StringProperty dynamicResultProperty = new SimpleStringProperty();
+        mainText.textProperty().bind(dynamicResultProperty);
 
+        Option placeholder = new Option("<CHOOSE AN OPTION>", null);
         ComboBox<Option> options = new ComboBox<>();
-        options.getItems().addAll(placeholder, option1, option2, option3);
+        options.getItems().add(placeholder);
+
+        List<Option> choiceOptions = player.getCurrentChoice().getOptionsList();
+        choiceOptions.forEach(option -> {
+            options.getItems().add(option);
+        });
+
+
+
         options.setValue(placeholder);
 
         options.setConverter(new StringConverter<>() {
@@ -39,6 +59,18 @@ public class Main extends Application{
             public Option fromString(String s) {
                 return null;
             }
+        });
+
+        button.setOnAction(event -> {
+            int i = 0;
+            int optionIndex = 404;
+            for(Option option : player.getCurrentChoice().getOptionsList()) {
+                if (option.equals(options.getValue())) {
+                    optionIndex = i;
+                }
+                i += 1;
+            }
+            player.makeChoice(optionIndex);
         });
 
         StackPane stackPane = new StackPane();
@@ -54,5 +86,19 @@ public class Main extends Application{
         primaryStage.setScene(scene);
         primaryStage.setTitle("Cosmic Beans Dev Test");
         primaryStage.show();
+
+        new Thread(() -> {
+            try {
+                while (true) {
+                    String dynamicResult = player.getCurrentChoiceText();
+
+                    javafx.application.Platform.runLater(() -> dynamicResultProperty.set(dynamicResult));
+
+                    Thread.sleep(1000); // Wait for 1 second (simulate result change)
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
