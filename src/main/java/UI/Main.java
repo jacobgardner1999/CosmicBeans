@@ -16,7 +16,7 @@ public class Main extends Application{
         launch(args);
     }
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Text mainText = new Text("<CHOICE TEXT>");
         Button button = new Button("GO!");
 
@@ -29,7 +29,7 @@ public class Main extends Application{
         options.getItems().addAll(placeholder, option1, option2, option3);
         options.setValue(placeholder);
 
-        options.setConverter(new StringConverter<Option>() {
+        options.setConverter(new StringConverter<>() {
             @Override
             public String toString(Option option) {
                 return option == null ? null : option.getOptionText();
