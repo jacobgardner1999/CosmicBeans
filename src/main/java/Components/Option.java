@@ -20,5 +20,9 @@ public class Option {
         this.traitRequirement = new Traits(0, 0, 0, 0);
     }
 
+    public String getOptionText() {
+        return optionText;
+    }
+
 
 }
