@@ -113,15 +113,11 @@ public class Main extends Application{
 
         for (int i = 0; i <= dynamicResult.length(); i++) {
             int finalI = i;
-            KeyFrame keyFrame = new KeyFrame(frameDuration.multiply(i), event -> {
-                dynamicResultProperty.set(dynamicResult.substring(0, finalI));
-            });
+            KeyFrame keyFrame = new KeyFrame(frameDuration.multiply(i), event -> dynamicResultProperty.set(dynamicResult.substring(0, finalI)));
             timeline.getKeyFrames().add(keyFrame);
         }
 
-        KeyFrame lastKeyFrame = new KeyFrame(frameDuration.multiply(dynamicResult.length() + 1), event -> {
-            dynamicResultProperty.set(dynamicResult);
-        });
+        KeyFrame lastKeyFrame = new KeyFrame(frameDuration.multiply(dynamicResult.length() + 1), event -> dynamicResultProperty.set(dynamicResult));
         timeline.getKeyFrames().add(lastKeyFrame);
 
         timeline.setCycleCount(1);
