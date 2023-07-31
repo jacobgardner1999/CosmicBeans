@@ -24,5 +24,11 @@ public class Option {
         return optionText;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Option option = (Option) o;
+        return optionText.equals(option.optionText);
+    }
 }
