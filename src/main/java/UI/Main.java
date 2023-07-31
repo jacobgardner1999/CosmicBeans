@@ -2,26 +2,28 @@ package UI;
 import Components.Game;
 import Components.Option;
 import Components.Player;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.util.StringConverter;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.util.List;
 import java.util.Objects;
 
 
 public class Main extends Application{
+    private final StringProperty dynamicResultProperty = new SimpleStringProperty();
+    private String dynamicResult = "";
+    private Timeline timeline;
     public static void main(String[] args) {
         launch(args);
     }
@@ -33,8 +35,9 @@ public class Main extends Application{
         game.setupGame(player);
 
         Text mainText = new Text();
-        StringProperty dynamicResultProperty = new SimpleStringProperty();
         mainText.textProperty().bind(dynamicResultProperty);
+        dynamicResultProperty.set(dynamicResult);
+        mainText.setFill(Color.WHITE);
 
         VBox buttonBox = new VBox();
         buttonBox.setAlignment(javafx.geometry.Pos.CENTER);
@@ -65,6 +68,8 @@ public class Main extends Application{
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(mainText, buttonBox);
 
+        stackPane.setStyle("-fx-background-color: black;");
+
         StackPane.setAlignment(stackPane, javafx.geometry.Pos.TOP_CENTER);
 
         StackPane.setMargin(mainText, new Insets(-40,0,0,0));
@@ -78,9 +83,9 @@ public class Main extends Application{
         new Thread(() -> {
             try {
                 while (true) {
-                    String dynamicResult = player.getCurrentChoiceText();
+                    String newText = player.getCurrentChoiceText();
 
-                    javafx.application.Platform.runLater(() -> dynamicResultProperty.set(dynamicResult));
+                    updateTextFromThread(newText);
                     javafx.application.Platform.runLater(generateButtons);
 
                     Thread.sleep(1000);
@@ -89,5 +94,38 @@ public class Main extends Application{
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private void updateTextFromThread(String newText) {
+        javafx.application.Platform.runLater(() -> {
+            dynamicResult = newText;
+            startTypingAnimation();
+        });
+    }
+    private void startTypingAnimation() {
+        if (timeline != null && timeline.getStatus() != Animation.Status.STOPPED || dynamicResultProperty.get().equals(dynamicResult)) {
+            return;
+        }
+
+        timeline = new Timeline();
+
+        Duration frameDuration = Duration.millis(100);
+
+        for (int i = 0; i <= dynamicResult.length(); i++) {
+            int finalI = i;
+            KeyFrame keyFrame = new KeyFrame(frameDuration.multiply(i), event -> {
+                dynamicResultProperty.set(dynamicResult.substring(0, finalI));
+            });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        KeyFrame lastKeyFrame = new KeyFrame(frameDuration.multiply(dynamicResult.length() + 1), event -> {
+            dynamicResultProperty.set(dynamicResult);
+        });
+        timeline.getKeyFrames().add(lastKeyFrame);
+
+        timeline.setCycleCount(1);
+
+        timeline.play();
     }
 }
