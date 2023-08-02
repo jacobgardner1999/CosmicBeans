@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLUI.LayoutController">
+   <children>
+       <Text fx:id="mainText" layoutX="90.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Default Text" textAlignment="CENTER" wrappingWidth="220.0" />
+       <VBox fx:id="buttonContainer" alignment="CENTER" layoutX="90.0" layoutY="168.0" prefHeight="200.0" prefWidth="220.0" />
+   </children>
+</AnchorPane>
