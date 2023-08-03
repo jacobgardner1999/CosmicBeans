@@ -6,7 +6,7 @@ public class OptionFactory {
         return new Option(optionText, choiceDestination, traitScore, traitRequirement);
     }
 
-    public Option createEmptyOption(String optionText, Choice choiceDestination) {
+    public Option createOption(String optionText, Choice choiceDestination) {
         return new Option(optionText, choiceDestination);
     }
 }
