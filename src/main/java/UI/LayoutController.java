@@ -18,8 +18,6 @@ import java.util.Objects;
 public class LayoutController {
     private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
 
-    private String dynamicResult = "";
-    private Timeline timeline;
     private final Player player;
 
 
@@ -48,10 +46,10 @@ public class LayoutController {
 
     public void updateText(String newText) {
         javafx.application.Platform.runLater(() -> {
-            dynamicResult = newText;
-            startTypingAnimation();
-
-            generateButtons();
+            if(!(Objects.equals(dynamicResultProperty.get(), newText))) {
+                dynamicResultProperty.set(newText);
+                generateButtons();
+            }
         });
     }
 
@@ -62,7 +60,6 @@ public class LayoutController {
             buttonContainer.getChildren().add(button);
 
             button.setOnAction(event -> {
-                System.out.println("Button Pressed!");
                 int i = 0;
                 int optionIndex = 404;
                 for (Option o : player.getCurrentChoice().getOptionsList()) {
@@ -74,31 +71,5 @@ public class LayoutController {
                 player.makeChoice(optionIndex);
             });
         }
-    }
-
-    private void startTypingAnimation() {
-        if (timeline != null && timeline.getStatus() != Animation.Status.STOPPED || dynamicResultProperty.get().equals(dynamicResult)) {
-            return;
-        }
-
-        dynamicResultProperty.set("");
-
-        timeline = new Timeline();
-        Duration frameDuration = Duration.millis(100);
-
-        for (int i = 0; i <= dynamicResult.length(); i++) {
-            int finalI = i;
-            KeyFrame keyFrame = new KeyFrame(frameDuration.multiply(i), event -> dynamicResultProperty.set(dynamicResult.substring(0, finalI)));
-            timeline.getKeyFrames().add(keyFrame);
-        }
-
-        KeyFrame lastKeyFrame = new KeyFrame(frameDuration.multiply(dynamicResult.length() + 1), event -> {
-            dynamicResultProperty.set(dynamicResult);
-            timeline = null;
-        });
-        timeline.getKeyFrames().add(lastKeyFrame);
-
-        timeline.setCycleCount(1);
-        timeline.play();
     }
 }

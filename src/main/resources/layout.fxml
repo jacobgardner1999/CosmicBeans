@@ -5,29 +5,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.LayoutController">
-    <Text fx:id="mainText" layoutX="90.0" layoutY="135.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Default Text" textAlignment="CENTER" wrappingWidth="220.0">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.LayoutController">
+    <Text fx:id="mainText" layoutX="172.0" layoutY="125.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Default Text" textAlignment="CENTER" wrappingWidth="400.0">
         <font>
          <Font size="14.0" />
         </font>
     </Text>
-    <VBox fx:id="buttonContainer" alignment="CENTER" layoutX="90.0" layoutY="168.0" prefHeight="200.0" prefWidth="220.0" />
-   <Text  fx:id="perceptionDisplay" layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Perception" textAlignment="CENTER" wrappingWidth="70.0">
+    <VBox fx:id="buttonContainer" spacing="20" alignment="CENTER" layoutX="172.0" layoutY="380.0" prefHeight="200.0" prefWidth="400.0" />
+   <Text fx:id="perceptionDisplay" layoutX="25.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Perception" wrappingWidth="70.0">
       <font>
          <Font size="14.0" />
       </font>
    </Text>
-   <Text fx:id="hustleDisplay" layoutX="120.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Hustle" textAlignment="CENTER" wrappingWidth="70.0">
+   <Text fx:id="hustleDisplay" layoutX="25.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Hustle" wrappingWidth="70.0">
       <font>
          <Font size="14.0" />
       </font>
    </Text>
-   <Text fx:id="charismaDisplay" layoutX="207.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Charisma" textAlignment="CENTER" wrappingWidth="70.0">
+   <Text fx:id="charismaDisplay" layoutX="25.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Charisma" wrappingWidth="70.0">
       <font>
          <Font size="14.0" />
       </font>
    </Text>
-   <Text fx:id="snootinessDisplay" layoutX="302.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Snootiness" textAlignment="CENTER" wrappingWidth="70.0">
+   <Text fx:id="snootinessDisplay" layoutX="25.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: White;" text="Snootiness" wrappingWidth="70.0">
       <font>
          <Font size="14.0" />
       </font>
