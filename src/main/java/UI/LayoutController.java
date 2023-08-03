@@ -17,9 +17,11 @@ import java.util.Objects;
 
 public class LayoutController {
     private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
+
     private String dynamicResult = "";
     private Timeline timeline;
     private final Player player;
+
 
     public LayoutController(Player player) {
         this.player = player;
@@ -29,7 +31,14 @@ public class LayoutController {
     private Text mainText;
     @FXML
     private VBox buttonContainer;
-
+    @FXML
+    private Text perceptionDisplay;
+    @FXML
+    private Text hustleDisplay;
+    @FXML
+    private Text charismaDisplay;
+    @FXML
+    private Text snootinessDisplay;
     @FXML
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
