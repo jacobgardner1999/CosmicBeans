@@ -14,11 +14,14 @@ public class Game {
         OptionFactory optionFactory = new OptionFactory();
         ChoiceFactory choiceFactory = new ChoiceFactory();
 
-        Choice choice1 = choiceFactory.createEndChoice("You walk into town to get a coffee.");
+        Choice choice1 = choiceFactory.createChoice("You walk into town to get a coffee.");
+        Choice choice2 = choiceFactory.createChoice("You sleep in, are late for work. You go to bed");
+        Choice startChoice = choiceFactory.createChoice("Your alarm blares. 6:25.");
+
         Option option1 = optionFactory.createEmptyOption("Walk into town for coffee.", choice1);
-        Choice choice2 = choiceFactory.createEndChoice("You sleep in, are late for work. You go to bed");
         Option option2 = optionFactory.createEmptyOption("Go back to sleep", choice2);
-        return choiceFactory.createChoice("Your alarm blares. 6:25.", List.of(option1, option2));
+        startChoice.addOptions(List.of(option1, option2));
+        return startChoice;
     }
 
 
