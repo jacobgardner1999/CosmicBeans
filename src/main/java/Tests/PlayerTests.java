@@ -17,7 +17,7 @@ public class PlayerTests {
         Player player = new Player();
         game.setupGame(player);
 
-        String choiceText = "Your alarm blares. 6:25.";
+        String choiceText = "Your alarm blares. 6:25am.";
         assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
@@ -28,7 +28,7 @@ public class PlayerTests {
         game.setupGame(player);
         player.makeChoice(0);
 
-        String choiceText = "You walk into town to get a coffee.";
+        String choiceText = "You get out of bed and start to get ready for work. Jumping in the shower, you reach to grab a body wash from the pot stuck to your wall with plastic suckers. The two shower gels you own are labelled 'Invigorate for Men', promising to energise you for the day, and 'Allure', promising to make you irresistible to the people around you. ";
         assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 

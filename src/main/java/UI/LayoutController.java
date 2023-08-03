@@ -50,6 +50,7 @@ public class LayoutController {
         javafx.application.Platform.runLater(() -> {
             dynamicResult = newText;
             startTypingAnimation();
+
             generateButtons();
         });
     }
@@ -61,6 +62,7 @@ public class LayoutController {
             buttonContainer.getChildren().add(button);
 
             button.setOnAction(event -> {
+                System.out.println("Button Pressed!");
                 int i = 0;
                 int optionIndex = 404;
                 for (Option o : player.getCurrentChoice().getOptionsList()) {

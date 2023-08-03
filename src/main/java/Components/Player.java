@@ -25,6 +25,7 @@ public class Player {
 
     public void makeChoice(int optionIndex) {
         Option option = currentChoice.getOption(optionIndex);
+        System.out.println("Making Choice!");
         if(option.traitRequirement.checkValid(playerTraits)) {
             currentChoice = option.choiceDestination;
             updateTraits(option.traitScore);

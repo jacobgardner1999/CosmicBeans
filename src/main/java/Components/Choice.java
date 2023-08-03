@@ -24,7 +24,7 @@ public class Choice {
     public void addOption(Option option) {
         optionsList.add(option);
     }
-    public void addOptions(List<Option> options) {
+    public void addOption(List<Option> options) {
         optionsList.addAll(options);
     }
 }
