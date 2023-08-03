@@ -1,6 +1,7 @@
 package UI;
 
 import Components.Option;
+import Components.Traits;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,6 +18,10 @@ import java.util.Objects;
 
 public class LayoutController {
     private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
+    private final StringProperty perceptionProperty = new SimpleStringProperty("@@@");
+    private final StringProperty hustleProperty = new SimpleStringProperty("@@@");
+    private final StringProperty charismaProperty = new SimpleStringProperty("@@@");
+    private final StringProperty snootinessProperty = new SimpleStringProperty("@@@");
 
     private final Player player;
 
@@ -40,6 +45,10 @@ public class LayoutController {
     @FXML
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
+        perceptionDisplay.textProperty().bind(perceptionProperty);
+        hustleDisplay.textProperty().bind(hustleProperty);
+        charismaDisplay.textProperty().bind(charismaProperty);
+        snootinessDisplay.textProperty().bind(snootinessProperty);
         updateText(player.getCurrentChoiceText());
         generateButtons();
     }
@@ -48,6 +57,7 @@ public class LayoutController {
         javafx.application.Platform.runLater(() -> {
             if(!(Objects.equals(dynamicResultProperty.get(), newText))) {
                 dynamicResultProperty.set(newText);
+                updateTraits();
                 generateButtons();
             }
         });
@@ -58,6 +68,9 @@ public class LayoutController {
         for (Option option : player.getCurrentChoice().getOptionsList()) {
             Button button = new Button(option.getOptionText());
             buttonContainer.getChildren().add(button);
+            if(!(option.traitRequirement.isLessThan(player.getPlayerTraits()))) {
+                button.setDisable(true);
+            }
 
             button.setOnAction(event -> {
                 int i = 0;
@@ -71,5 +84,13 @@ public class LayoutController {
                 player.makeChoice(optionIndex);
             });
         }
+    }
+    private void updateTraits() {
+        Traits traits = player.getPlayerTraits();
+
+        perceptionProperty.set(String.valueOf(traits.getPerception()));
+        hustleProperty.set(String.valueOf(traits.getHustle()));
+        charismaProperty.set(String.valueOf(traits.getCharisma()));
+        snootinessProperty.set(String.valueOf(traits.getSnootiness()));
     }
 }

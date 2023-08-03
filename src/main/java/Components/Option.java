@@ -16,8 +16,8 @@ public class Option {
     public Option(String optionText, Choice choiceDestination) {
         this.optionText = optionText;
         this.choiceDestination = choiceDestination;
-        this.traitScore = new Traits(0, 0, 0, 0);
-        this.traitRequirement = new Traits(0, 0, 0, 0);
+        this.traitScore = new Traits();
+        this.traitRequirement = new Traits();
     }
 
     public String getOptionText() {

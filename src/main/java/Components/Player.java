@@ -25,7 +25,7 @@ public class Player {
 
     public void makeChoice(int optionIndex) {
         Option option = currentChoice.getOption(optionIndex);
-        if(option.traitRequirement.checkValid(playerTraits)) {
+        if(option.traitRequirement.isLessThan(playerTraits)) {
             currentChoice = option.choiceDestination;
             updateTraits(option.traitScore);
         }
