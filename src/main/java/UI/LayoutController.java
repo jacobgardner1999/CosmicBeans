@@ -1,6 +1,7 @@
 package UI;
 
 import Components.Option;
+import Components.Traits;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,9 +18,11 @@ import java.util.Objects;
 
 public class LayoutController {
     private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
+    private final StringProperty perceptionProperty = new SimpleStringProperty("@@@");
+    private final StringProperty hustleProperty = new SimpleStringProperty("@@@");
+    private final StringProperty charismaProperty = new SimpleStringProperty("@@@");
+    private final StringProperty snootinessProperty = new SimpleStringProperty("@@@");
 
-    private String dynamicResult = "";
-    private Timeline timeline;
     private final Player player;
 
 
@@ -42,15 +45,21 @@ public class LayoutController {
     @FXML
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
+        perceptionDisplay.textProperty().bind(perceptionProperty);
+        hustleDisplay.textProperty().bind(hustleProperty);
+        charismaDisplay.textProperty().bind(charismaProperty);
+        snootinessDisplay.textProperty().bind(snootinessProperty);
         updateText(player.getCurrentChoiceText());
         generateButtons();
     }
 
     public void updateText(String newText) {
         javafx.application.Platform.runLater(() -> {
-            dynamicResult = newText;
-            startTypingAnimation();
-            generateButtons();
+            if(!(Objects.equals(dynamicResultProperty.get(), newText))) {
+                dynamicResultProperty.set(newText);
+                updateTraits();
+                generateButtons();
+            }
         });
     }
 
@@ -59,6 +68,9 @@ public class LayoutController {
         for (Option option : player.getCurrentChoice().getOptionsList()) {
             Button button = new Button(option.getOptionText());
             buttonContainer.getChildren().add(button);
+            if(!(option.traitRequirement.isLessThan(player.getPlayerTraits()))) {
+                button.setDisable(true);
+            }
 
             button.setOnAction(event -> {
                 int i = 0;
@@ -73,30 +85,12 @@ public class LayoutController {
             });
         }
     }
+    private void updateTraits() {
+        Traits traits = player.getPlayerTraits();
 
-    private void startTypingAnimation() {
-        if (timeline != null && timeline.getStatus() != Animation.Status.STOPPED || dynamicResultProperty.get().equals(dynamicResult)) {
-            return;
-        }
-
-        dynamicResultProperty.set("");
-
-        timeline = new Timeline();
-        Duration frameDuration = Duration.millis(100);
-
-        for (int i = 0; i <= dynamicResult.length(); i++) {
-            int finalI = i;
-            KeyFrame keyFrame = new KeyFrame(frameDuration.multiply(i), event -> dynamicResultProperty.set(dynamicResult.substring(0, finalI)));
-            timeline.getKeyFrames().add(keyFrame);
-        }
-
-        KeyFrame lastKeyFrame = new KeyFrame(frameDuration.multiply(dynamicResult.length() + 1), event -> {
-            dynamicResultProperty.set(dynamicResult);
-            timeline = null;
-        });
-        timeline.getKeyFrames().add(lastKeyFrame);
-
-        timeline.setCycleCount(1);
-        timeline.play();
+        perceptionProperty.set(String.valueOf(traits.getPerception()));
+        hustleProperty.set(String.valueOf(traits.getHustle()));
+        charismaProperty.set(String.valueOf(traits.getCharisma()));
+        snootinessProperty.set(String.valueOf(traits.getSnootiness()));
     }
 }

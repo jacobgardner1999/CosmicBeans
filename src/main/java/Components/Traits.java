@@ -33,7 +33,7 @@ public class Traits {
         return snootiness;
     }
 
-    public boolean checkValid(Traits traits) {
+    public boolean isLessThan(Traits traits) {
         return (traits.perception >= perception)
                 && (traits.hustle >= hustle)
                 && (traits.charisma >= charisma)

@@ -28,7 +28,7 @@ public class Main extends Application {
         LayoutController controller = fxmlLoader.getController();
 
         primaryStage.setTitle("Cosmic Beans DEV TEST");
-        primaryStage.setScene(new Scene(root, 400, 300));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 
         new Thread(() -> {
@@ -38,7 +38,7 @@ public class Main extends Application {
 
                     controller.updateText(newText);
 
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
