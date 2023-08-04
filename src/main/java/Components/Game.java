@@ -27,29 +27,29 @@ public class Game {
         Choice c6_1 = choiceFactory.createChoice("You continue to sleep in every day. You work. You go home. You sleep. Every day the same. One day at work you overhear a conversation about the local coffee shop closing down. Someone remarks about that being sad. You continue working. Continue sleeping in. Continue existing.");
 
         Option o1_0_0 = optionFactory.createOption("Wake up.", c1_0);
-        Option o2_0_0 = optionFactory.createOption("Sleep in. \n (-5 Hustle)", c1_1, new Traits(0, -5, 0, 0), new Traits());
+        Option o2_0_0 = optionFactory.createOption("Sleep in.", c1_1, new Traits(0, -5, 0, 0), new Traits());
         c0_0.addOption(List.of(o1_0_0, o2_0_0));
 
-        Option o1_1_0 = optionFactory.createOption("Invigorate for Men \n (+10 Hustle)", c2_0, new Traits(0, 10, 0, 0), new Traits());
-        Option o2_1_0 = optionFactory.createOption("Allure \n (+10 Charisma)", c2_0, new Traits(0, 0, 10, 0), new Traits());
-        Option o3_1_0 = optionFactory.createOption("Mix the two together \n (+5 Hustle, +5 Charisma", c2_0, new Traits(0, 5, 5, 0), new Traits());
+        Option o1_1_0 = optionFactory.createOption("Invigorate for Men.", c2_0, new Traits(0, 10, 0, 0), new Traits());
+        Option o2_1_0 = optionFactory.createOption("Allure.", c2_0, new Traits(0, 0, 10, 0), new Traits());
+        Option o3_1_0 = optionFactory.createOption("Mix the two together.", c2_0, new Traits(0, 5, 5, 0), new Traits());
         c1_0.addOption(List.of(o1_1_0, o2_1_0, o3_1_0));
 
         Option o1_1_1 = optionFactory.createOption("Go to sleep.", c2_1);
         c1_1.addOption(o1_1_1);
 
         Option o1_2_0 = optionFactory.createOption("Go to the coffee shop.", c3_0);
-        Option o2_2_0 = optionFactory.createOption("Walk straight to work \n (Requires 30 Hustle)", c3_1, new Traits(), new Traits(0, 30, 0, 0));
+        Option o2_2_0 = optionFactory.createOption("Walk straight to work. \n (Requires 30 Hustle)", c3_1, new Traits(), new Traits(0, 30, 0, 0));
         c2_0.addOption(List.of(o1_2_0, o2_2_0));
 
         Option o1_2_1 = optionFactory.createOption("Wake up.", c1_0);
-        Option o2_2_1 = optionFactory.createOption("Sleep in. \n (-5 Hustle)", c3_2, new Traits(0, -5, 0, 0), new Traits());
+        Option o2_2_1 = optionFactory.createOption("Sleep in.", c3_2, new Traits(0, -5, 0, 0), new Traits());
         c2_1.addOption(List.of(o1_2_1, o2_2_1));
 
-        Option o1_3_0 = optionFactory.createOption("Enter the shop. \n (+5 Perception)", c4_0, new Traits(5, 0, 0, 0), new Traits());
+        Option o1_3_0 = optionFactory.createOption("Enter the shop.", c4_0, new Traits(5, 0, 0, 0), new Traits());
         c3_0.addOption(o1_3_0);
 
-        Option o1_3_1 = optionFactory.createOption("Enter the shop", c4_0);
+        Option o1_3_1 = optionFactory.createOption("Enter the shop", c4_0, new Traits(5, 0, 0, 0), new Traits());
         c3_1.addOption(o1_3_1);
 
         Option o1_3_2 = optionFactory.createOption("Go to sleep", c4_1);
@@ -58,7 +58,7 @@ public class Game {
         // TODO- add options for c4_0
 
         Option o1_4_1 = optionFactory.createOption("Wake up.", c1_0);
-        Option o2_4_1 = optionFactory.createOption("Sleep in. \n (-5 Hustle)", c5_1, new Traits(0, -5, 0, 0), new Traits());
+        Option o2_4_1 = optionFactory.createOption("Sleep in.", c5_1, new Traits(0, -5, 0, 0), new Traits());
         c4_1.addOption(List.of(o1_4_1, o2_4_1));
 
         Option o1_5_1 = optionFactory.createOption("Go to sleep", c6_1);
