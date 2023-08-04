@@ -1,0 +1,28 @@
+@font-face {
+  src: url(fonts/ShareTechMono-Regular.ttf);
+}
+
+* {
+    -fx-font-family: 'Share Tech Mono';
+    -fx-font-size: 14;
+    -fx-fill: white;
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-radius: 1;
+}
+
+.button:hover {
+    -fx-background-color: gray;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+    -fx-border-width: 2;
+}
+.button:disabled {
+    -fx-background-color: lightGray;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}

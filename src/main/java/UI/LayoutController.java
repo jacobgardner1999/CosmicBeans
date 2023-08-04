@@ -9,7 +9,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import Components.Player;
@@ -24,6 +26,7 @@ public class LayoutController {
     private final StringProperty snootinessProperty = new SimpleStringProperty("@@@");
 
     private final Player player;
+    public StackPane loadingOverlay;
 
 
     public LayoutController(Player player) {
@@ -59,6 +62,7 @@ public class LayoutController {
                 dynamicResultProperty.set(newText);
                 updateTraits();
                 generateButtons();
+                loadingOverlay.setVisible(false);
             }
         });
     }
@@ -67,12 +71,14 @@ public class LayoutController {
         buttonContainer.getChildren().clear();
         for (Option option : player.getCurrentChoice().getOptionsList()) {
             Button button = new Button(option.getOptionText());
+            button.getStyleClass().add("button");
             buttonContainer.getChildren().add(button);
             if(!(option.traitRequirement.isLessThan(player.getPlayerTraits()))) {
                 button.setDisable(true);
             }
 
             button.setOnAction(event -> {
+                loadingOverlay.setVisible(true);
                 int i = 0;
                 int optionIndex = 404;
                 for (Option o : player.getCurrentChoice().getOptionsList()) {

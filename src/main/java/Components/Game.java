@@ -49,7 +49,7 @@ public class Game {
         Option o1_3_0 = optionFactory.createOption("Enter the shop.", c4_0, new Traits(5, 0, 0, 0), new Traits());
         c3_0.addOption(o1_3_0);
 
-        Option o1_3_1 = optionFactory.createOption("Enter the shop", c4_0);
+        Option o1_3_1 = optionFactory.createOption("Enter the shop", c4_0, new Traits(5, 0, 0, 0), new Traits());
         c3_1.addOption(o1_3_1);
 
         Option o1_3_2 = optionFactory.createOption("Go to sleep", c4_1);
