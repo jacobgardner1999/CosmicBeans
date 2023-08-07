@@ -16,20 +16,19 @@ import Components.Player;
 
 import java.util.Objects;
 
-public class LayoutController {
+public class GamePageController {
     private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
     private final StringProperty perceptionProperty = new SimpleStringProperty("000");
     private final StringProperty hustleProperty = new SimpleStringProperty("000");
     private final StringProperty charismaProperty = new SimpleStringProperty("000");
     private final StringProperty snootinessProperty = new SimpleStringProperty("000");
 
-    private final Player player;
+    private Player player;
     @FXML
     private StackPane loadingOverlay;
 
 
-    public LayoutController(Player player) {
-        this.player = player;
+    public GamePageController() {
     }
 
     @FXML
@@ -75,6 +74,9 @@ public class LayoutController {
             if(Integer.parseInt(oldValue) < Integer.parseInt(newValue)) { updateAnimation(snootinessDisplay, Color.GREEN);}
             else { updateAnimation(snootinessDisplay, Color.RED);}
         });
+    }
+
+    public void setUpGameScreen() {
         updateText(player.getCurrentChoiceText());
         generateButtons();
     }
@@ -86,10 +88,10 @@ public class LayoutController {
                 updateTraits();
                 generateButtons();
                 loadingOverlay.setVisible(false);
+                System.out.println();
             }
         });
     }
-
     private void generateButtons() {
         buttonContainer.getChildren().clear();
         for (Option option : player.getCurrentChoice().getOptionsList()) {
@@ -135,6 +137,10 @@ public class LayoutController {
         FillTransition fillTransition = new FillTransition(duration, textNode, startColor, endColor);
         fillTransition.setOnFinished(event -> textNode.setFill(endColor));
         fillTransition.play();
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
 

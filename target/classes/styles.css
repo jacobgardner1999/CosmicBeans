@@ -8,6 +8,10 @@
     -fx-fill: white;
 }
 
+.titleText {
+    -fx-font-size: 48;
+}
+
 .button {
     -fx-background-color: black;
     -fx-border-color: white;
