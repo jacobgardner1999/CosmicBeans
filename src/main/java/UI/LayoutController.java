@@ -2,16 +2,14 @@ package UI;
 
 import Components.Option;
 import Components.Traits;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.FillTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import Components.Player;
@@ -50,9 +48,25 @@ public class LayoutController {
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
         perceptionDisplay.textProperty().bind(perceptionProperty);
+        perceptionProperty.addListener((observable, oldValue, newValue) -> {
+            perceptionDisplay.setFill(Color.GREEN);
+            updateAnimation(perceptionDisplay);
+        });
         hustleDisplay.textProperty().bind(hustleProperty);
+        hustleProperty.addListener((observable, oldValue, newValue) -> {
+            hustleDisplay.setFill(Color.GREEN);
+            updateAnimation(hustleDisplay);
+        });
         charismaDisplay.textProperty().bind(charismaProperty);
+        charismaProperty.addListener((observable, oldValue, newValue) -> {
+            charismaDisplay.setFill(Color.GREEN);
+            updateAnimation(charismaDisplay);
+        });
         snootinessDisplay.textProperty().bind(snootinessProperty);
+        snootinessProperty.addListener((observable, oldValue, newValue) -> {
+            snootinessDisplay.setFill(Color.GREEN);
+            updateAnimation(snootinessDisplay);
+        });
         updateText(player.getCurrentChoiceText());
         generateButtons();
     }
@@ -100,4 +114,15 @@ public class LayoutController {
         charismaProperty.set(String.valueOf(traits.getCharisma()));
         snootinessProperty.set(String.valueOf(traits.getSnootiness()));
     }
+
+    private void updateAnimation(Text textNode) {
+        Color startColor = Color.GREEN;
+        Color endColor = Color.WHITE;
+        Duration duration = Duration.seconds(3);
+
+        FillTransition fillTransition = new FillTransition(duration, textNode, startColor, endColor);
+        fillTransition.setOnFinished(event -> textNode.setFill(endColor));
+        fillTransition.play();
+    }
 }
+
