@@ -26,6 +26,7 @@ public class LayoutController {
     private final StringProperty snootinessProperty = new SimpleStringProperty("@@@");
 
     private final Player player;
+    @FXML
     private StackPane loadingOverlay;
 
 
