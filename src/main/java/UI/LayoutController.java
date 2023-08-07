@@ -18,10 +18,10 @@ import java.util.Objects;
 
 public class LayoutController {
     private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
-    private final StringProperty perceptionProperty = new SimpleStringProperty("@@@");
-    private final StringProperty hustleProperty = new SimpleStringProperty("@@@");
-    private final StringProperty charismaProperty = new SimpleStringProperty("@@@");
-    private final StringProperty snootinessProperty = new SimpleStringProperty("@@@");
+    private final StringProperty perceptionProperty = new SimpleStringProperty("000");
+    private final StringProperty hustleProperty = new SimpleStringProperty("000");
+    private final StringProperty charismaProperty = new SimpleStringProperty("000");
+    private final StringProperty snootinessProperty = new SimpleStringProperty("000");
 
     private final Player player;
     @FXML
@@ -48,24 +48,32 @@ public class LayoutController {
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
         perceptionDisplay.textProperty().bind(perceptionProperty);
+        perceptionDisplay.setFill(Color.WHITE);
         perceptionProperty.addListener((observable, oldValue, newValue) -> {
             perceptionDisplay.setFill(Color.GREEN);
-            updateAnimation(perceptionDisplay);
+            if(Integer.parseInt(oldValue) < Integer.parseInt(newValue)) { updateAnimation(perceptionDisplay, Color.GREEN);}
+            else { updateAnimation(perceptionDisplay, Color.RED);}
         });
         hustleDisplay.textProperty().bind(hustleProperty);
+        hustleDisplay.setFill(Color.WHITE);
         hustleProperty.addListener((observable, oldValue, newValue) -> {
             hustleDisplay.setFill(Color.GREEN);
-            updateAnimation(hustleDisplay);
+            if(Integer.parseInt(oldValue) < Integer.parseInt(newValue)) { updateAnimation(hustleDisplay, Color.GREEN);}
+            else { updateAnimation(hustleDisplay, Color.RED);}
         });
         charismaDisplay.textProperty().bind(charismaProperty);
+        charismaDisplay.setFill(Color.WHITE);
         charismaProperty.addListener((observable, oldValue, newValue) -> {
             charismaDisplay.setFill(Color.GREEN);
-            updateAnimation(charismaDisplay);
+            if(Integer.parseInt(oldValue) < Integer.parseInt(newValue)) { updateAnimation(charismaDisplay, Color.GREEN);}
+            else { updateAnimation(charismaDisplay, Color.RED);}
         });
         snootinessDisplay.textProperty().bind(snootinessProperty);
+        charismaDisplay.setFill(Color.WHITE);
         snootinessProperty.addListener((observable, oldValue, newValue) -> {
             snootinessDisplay.setFill(Color.GREEN);
-            updateAnimation(snootinessDisplay);
+            if(Integer.parseInt(oldValue) < Integer.parseInt(newValue)) { updateAnimation(snootinessDisplay, Color.GREEN);}
+            else { updateAnimation(snootinessDisplay, Color.RED);}
         });
         updateText(player.getCurrentChoiceText());
         generateButtons();
@@ -115,8 +123,7 @@ public class LayoutController {
         snootinessProperty.set(String.valueOf(traits.getSnootiness()));
     }
 
-    private void updateAnimation(Text textNode) {
-        Color startColor = Color.GREEN;
+    private void updateAnimation(Text textNode, Color startColor) {
         Color endColor = Color.WHITE;
         Duration duration = Duration.seconds(3);
 
