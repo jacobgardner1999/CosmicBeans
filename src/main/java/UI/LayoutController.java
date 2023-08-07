@@ -110,7 +110,12 @@ public class LayoutController {
                     }
                     i += 1;
                 }
-                player.makeChoice(optionIndex);
+                if(optionIndex != 404) {
+                    player.makeChoice(optionIndex);
+                }
+                else {
+                    System.out.println("Button option index out of bounds.");;
+                }
             });
         }
     }
