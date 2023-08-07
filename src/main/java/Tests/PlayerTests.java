@@ -15,9 +15,9 @@ public class PlayerTests {
     public void StartGameInstance() {
         Game game = new Game();
         Player player = new Player();
-        game.startGame(player);
+        game.setupGame(player);
 
-        String choiceText = "Your alarm blares. 6:25.";
+        String choiceText = "Your alarm blares. 6:25am.";
         assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
@@ -25,10 +25,10 @@ public class PlayerTests {
     public void PlayerGivenNewChoiceOnMakeChoice() {
         Game game = new Game();
         Player player = new Player();
-        game.startGame(player);
+        game.setupGame(player);
         player.makeChoice(0);
 
-        String choiceText = "You walk into town to get a coffee.";
+        String choiceText = "You get out of bed and start to get ready for work. Jumping in the shower, you reach to grab a body wash from the pot stuck to your wall with plastic suckers. The two shower gels you own are labelled 'Invigorate for Men', promising to energise you for the day, and 'Allure', promising to make you irresistible to the people around you. ";
         assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
@@ -40,7 +40,8 @@ public class PlayerTests {
         ChoiceFactory choiceFactory = new ChoiceFactory();
         Traits optionTraits = new Traits(5, 10, 5, 0);
         Option option = factory.createOption("Option 1", null, optionTraits, new Traits());
-        Choice choice = choiceFactory.createChoice("Choice", List.of(option));
+        Choice choice = choiceFactory.createChoice("Choice");
+        choice.addOption(option);
 
         game.giveChoice(player, choice);
         player.makeChoice(0);
@@ -58,10 +59,11 @@ public class PlayerTests {
         Player player = new Player();
         Traits traitRequirement = new Traits(50, 0, 0, 0);
 
-        Choice badChoice = choiceFactory.createEndChoice("Un-choosable");
+        Choice badChoice = choiceFactory.createChoice("Un-choosable");
 
         Option option = factory.createOption("Option 1", badChoice, new Traits(), traitRequirement);
-        Choice choice = choiceFactory.createChoice("Choice", List.of(option));
+        Choice choice = choiceFactory.createChoice("Choice");
+        choice.addOption(option);
 
         game.giveChoice(player, choice);
 
@@ -78,10 +80,11 @@ public class PlayerTests {
         Player player = new Player(new Traits(50, 45, 80, 30));
         Traits traitRequirement = new Traits(50, 45, 80, 30);
 
-        Choice destination = choiceFactory.createEndChoice("Expected result");
+        Choice destination = choiceFactory.createChoice("Expected result");
 
         Option option = factory.createOption("Option 1", destination, new Traits(), traitRequirement);
-        Choice choice = choiceFactory.createChoice("Second Choice", List.of(option));
+        Choice choice = choiceFactory.createChoice("Second Choice");
+        choice.addOption(option);
 
         game.giveChoice(player, choice);
         player.makeChoice(0);
