@@ -8,12 +8,15 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgb(71, 69, 67);" stylesheets="main/resources/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.LayoutController">
-
-    <Text fx:id="mainText" layoutX="200.0" layoutY="249.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Default Text" textAlignment="CENTER" wrappingWidth="400.0">
-        <font>
-         <Font size="14.0" />
-        </font>
-    </Text>
+    <StackPane AnchorPane.topAnchor="200" AnchorPane.bottomAnchor="250" AnchorPane.leftAnchor="50"
+               AnchorPane.rightAnchor="50">
+        <Text fx:id="mainText" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Default Text" textAlignment="CENTER" wrappingWidth="400.0">
+            <font>
+             <Font size="14.0" />
+            </font>
+        </Text>
+        <Text opacity="0">Spacer Element</Text>
+    </StackPane>
     <VBox fx:id="buttonContainer" alignment="TOP_CENTER" layoutX="200.0" layoutY="380.0" prefHeight="200.0" prefWidth="400.0" spacing="20" />
     <Text layoutX="25.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perception:" wrappingWidth="85.0">
         <font>
