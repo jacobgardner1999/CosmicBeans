@@ -77,8 +77,21 @@ public class GamePageController {
     }
 
     public void setUpGameScreen() {
-        updateText(player.getCurrentChoiceText());
-        generateButtons();
+//        updateText(player.getCurrentChoiceText());
+//        generateButtons();
+        new Thread(() -> {
+            try {
+                while (true) {
+                    String newText = player.getCurrentChoiceText();
+
+                    updateText(newText);
+
+                    Thread.sleep(500);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     public void updateText(String newText) {
