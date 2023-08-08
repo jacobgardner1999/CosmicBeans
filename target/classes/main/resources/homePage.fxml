@@ -7,7 +7,7 @@
 
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgb(71, 69, 67);"
-            stylesheets="main/resources/styles.css" xmlns="http://javafx.com/javafx/20.0.1"
+            stylesheets="styles.css" xmlns="http://javafx.com/javafx/20.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.HomePageController">
     <Button fx:id="startButton" layoutX="350.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
             text="Start Game"/>

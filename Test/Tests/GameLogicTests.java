@@ -8,7 +8,7 @@ import org.junit.Test;
 public class GameLogicTests {
 
     @Test
-    public void StartGameInstance() {
+    public void startGameInstance() {
         Game game = new Game();
         Player player = new Player();
         game.setupGame(player);
@@ -18,7 +18,7 @@ public class GameLogicTests {
     }
 
     @Test
-    public void PlayerGivenNewChoiceOnMakeChoice() {
+    public void playerGivenNewChoiceOnMakeChoice() {
         Game game = new Game();
         Player player = new Player();
         game.setupGame(player);
@@ -29,7 +29,7 @@ public class GameLogicTests {
     }
 
     @Test
-    public void ChoiceUpdatesPlayerTrait() {
+    public void choiceUpdatesPlayerTrait() {
         Game game = new Game();
         Player player = new Player();
         OptionFactory factory = new OptionFactory();
@@ -48,7 +48,7 @@ public class GameLogicTests {
     }
 
     @Test
-    public void OptionNotAvailableBasedOnPlayerTrait() {
+    public void optionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
         OptionFactory factory = new OptionFactory();
         ChoiceFactory choiceFactory = new ChoiceFactory();
@@ -69,7 +69,7 @@ public class GameLogicTests {
     }
 
     @Test
-    public void PlayerMakesChoiceWithMultipleRequirements() {
+    public void playerMakesChoiceWithMultipleRequirements() {
         Game game = new Game();
         OptionFactory factory = new OptionFactory();
         ChoiceFactory choiceFactory = new ChoiceFactory();

@@ -24,13 +24,13 @@ public class GamePageController {
     private final StringProperty snootinessProperty = new SimpleStringProperty("000");
 
     private Player player;
-    @FXML
-    private StackPane loadingOverlay;
+    private int[] index = new int[] {0, 0};
 
 
     public GamePageController() {
     }
-
+    @FXML
+    private StackPane loadingOverlay;
     @FXML
     private Text mainText;
     @FXML
@@ -77,8 +77,6 @@ public class GamePageController {
     }
 
     public void setUpGameScreen() {
-//        updateText(player.getCurrentChoiceText());
-//        generateButtons();
         new Thread(() -> {
             try {
                 while (true) {
@@ -110,6 +108,7 @@ public class GamePageController {
         for (Option option : player.getCurrentChoice().getOptionsList()) {
             Button button = new Button(option.getOptionText());
             button.getStyleClass().add("button");
+            button.setId("choiceButton" + index[0] + "_" + index[1]);
             buttonContainer.getChildren().add(button);
             if(!(option.traitRequirement.isLessThan(player.getPlayerTraits()))) {
                 button.setDisable(true);
@@ -132,7 +131,9 @@ public class GamePageController {
                     System.out.println("Button option index out of bounds.");;
                 }
             });
+            index[0]++;
         }
+        index[1]++;
     }
     private void updateTraits() {
         Traits traits = player.getPlayerTraits();
