@@ -1,5 +1,3 @@
-package Tests;
-
 import Components.Game;
 import Components.Player;
 import UI.Display;

@@ -1,5 +1,3 @@
-package Tests;
-
 import Components.*;
 import Helpers.InsufficientTraitException;
 import org.assertj.core.api.Assertions;

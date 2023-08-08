@@ -105,6 +105,7 @@ public class GamePageController {
     }
     private void generateButtons() {
         buttonContainer.getChildren().clear();
+        index[1] = 0;
         for (Option option : player.getCurrentChoice().getOptionsList()) {
             Button button = new Button(option.getOptionText());
             button.getStyleClass().add("button");
@@ -131,9 +132,9 @@ public class GamePageController {
                     System.out.println("Button option index out of bounds.");;
                 }
             });
-            index[0]++;
+            index[1]++;
         }
-        index[1]++;
+        index[0]++;
     }
     private void updateTraits() {
         Traits traits = player.getPlayerTraits();
