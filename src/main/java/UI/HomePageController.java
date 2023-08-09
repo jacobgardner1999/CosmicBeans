@@ -1,6 +1,7 @@
 package UI;
 
 import Components.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -8,16 +9,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HomePageController {
-    private final Player player;
     private final Stage primaryStage;
 
-    public HomePageController(Player player, Stage primaryStage) {
-        this.player = player;
+    public HomePageController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
     @FXML
-    Button startButton;
+    private Button startButton;
+    @FXML
+    private Button exitButton;
     @FXML
     public void initialize() {
     startButton.setOnAction(event -> {
@@ -27,11 +28,12 @@ public class HomePageController {
             throw new RuntimeException(e);
         }
     });
+    exitButton.setOnAction(event -> Platform.exit());
     }
 
     private void startGameHandler() throws IOException {
         Display display = new Display();
-        display.viewGamePage(primaryStage, player);
+        display.viewGamePage(primaryStage);
 
     }
 }

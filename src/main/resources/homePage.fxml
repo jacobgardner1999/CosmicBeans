@@ -11,7 +11,7 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.HomePageController">
     <Button fx:id="startButton" layoutX="350.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
             text="Start Game"/>
-    <Button layoutX="350.0" layoutY="340.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Exit"/>
+    <Button fx:id="exitButton" layoutX="350.0" layoutY="340.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Exit"/>
     <Text styleClass="titleText" layoutX="246.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cosmic Beans">
         <font>
           <Font size="48.0"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="UITests" time="7.758" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="UITests" time="15.996" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="javafx.runtime.version" value="20.0.2+3"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Users\Jacob.Gardner\.jdks\corretto-20\bin"/>
-    <property name="sun.java.command" value="C:\Users\Jacob.Gardner\AppData\Local\Temp\surefire14343716657699880993\surefirebooter-20230808160709332_3.jar C:\Users\Jacob.Gardner\AppData\Local\Temp\surefire14343716657699880993 2023-08-08T16-07-09_101-jvmRun1 surefire-20230808160709332_1tmp surefire_0-20230808160709332_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Jacob.Gardner\AppData\Local\Temp\surefire14809581885247029107\surefirebooter-20230809083951344_3.jar C:\Users\Jacob.Gardner\AppData\Local\Temp\surefire14809581885247029107 2023-08-09T08-39-50_921-jvmRun1 surefire-20230809083951344_1tmp surefire_0-20230809083951344_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Jacob.Gardner\IdeaProjects\CosmicBeans\CosmicBeans\target\test-classes;C:\Users\Jacob.Gardner\IdeaProjects\CosmicBeans\CosmicBeans\target\classes;C:\Users\Jacob.Gardner\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\Jacob.Gardner\.m2\repository\net\bytebuddy\byte-buddy\1.12.21\byte-buddy-1.12.21.jar;C:\Users\Jacob.Gardner\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-controls\20.0.2\javafx-controls-20.0.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-controls\20.0.2\javafx-controls-20.0.2-win.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-graphics\20.0.2\javafx-graphics-20.0.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-graphics\20.0.2\javafx-graphics-20.0.2-win.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-base\20.0.2\javafx-base-20.0.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-base\20.0.2\javafx-base-20.0.2-win.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-fxml\20.0.2\javafx-fxml-20.0.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\openjfx\javafx-fxml\20.0.2\javafx-fxml-20.0.2-win.jar;C:\Users\Jacob.Gardner\.m2\repository\org\testng\testng\7.8.0\testng-7.8.0.jar;C:\Users\Jacob.Gardner\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\Jacob.Gardner\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\Jacob.Gardner\.m2\repository\org\webjars\jquery\3.6.1\jquery-3.6.1.jar;C:\Users\Jacob.Gardner\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Jacob.Gardner\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Jacob.Gardner\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\Jacob.Gardner\.m2\repository\org\testfx\testfx-junit\4.0.6-alpha\testfx-junit-4.0.6-alpha.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Jacob.Gardner\AppData\Local\Temp\surefire14343716657699880993\surefirebooter-20230808160709332_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Jacob.Gardner\AppData\Local\Temp\surefire14809581885247029107\surefirebooter-20230809083951344_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20+36-FR"/>
@@ -61,37 +61,35 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="checkInsufficientTraitOptionDisabled" classname="UITests" time="5.4">
-    <system-out><![CDATA[choiceButton0_0
-choiceButton0_1
+  <testcase name="checkInsufficientTraitOptionDisabled" classname="UITests" time="5.936">
+    <system-out><![CDATA[
 
-choiceButton1_0
-choiceButton1_1
-choiceButton1_2
-
-choiceButton2_0
-choiceButton2_1
 
 ]]></system-out>
-    <system-err><![CDATA[Aug 08, 2023 4:07:10 PM com.sun.javafx.application.PlatformImpl startup
+    <system-err><![CDATA[Aug 09, 2023 8:39:52 AM com.sun.javafx.application.PlatformImpl startup
 WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @12f41634'
 ]]></system-err>
   </testcase>
-  <testcase name="checkStartGame" classname="UITests" time="0.829">
-    <system-out><![CDATA[choiceButton0_0
-choiceButton0_1
+  <testcase name="checkRequiredTraitOptionEnabled" classname="UITests" time="3.844">
+    <system-out><![CDATA[
+
 
 ]]></system-out>
   </testcase>
-  <testcase name="playerChoiceUpdatesText" classname="UITests" time="1.337">
-    <system-out><![CDATA[choiceButton0_0
-choiceButton0_1
+  <testcase name="checkTraitUpdates" classname="UITests" time="3.415">
+    <system-out><![CDATA[
 
-choiceButton1_0
-choiceButton1_1
-choiceButton1_2
 
 ]]></system-out>
   </testcase>
-  <testcase name="checkStartButton" classname="UITests" time="0.189"/>
+  <testcase name="checkStartGame" classname="UITests" time="0.714">
+    <system-out><![CDATA[
+]]></system-out>
+  </testcase>
+  <testcase name="playerChoiceUpdatesText" classname="UITests" time="1.902">
+    <system-out><![CDATA[
+
+]]></system-out>
+  </testcase>
+  <testcase name="checkStartButton" classname="UITests" time="0.184"/>
 </testsuite>
