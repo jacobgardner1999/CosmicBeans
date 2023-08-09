@@ -86,4 +86,20 @@ public class GameLogicTests {
         Assertions.assertThat(player.getCurrentChoiceText()).isEqualTo("Expected result");
     }
 
+    @Test
+    public void saveGameState() {
+        Game game = new Game();
+        Player player = new Player();
+        game.setupGame(player);
+
+        player.makeChoice(0);
+        player.makeChoice(1);
+
+        SaveLoadManager.saveGame(player, "testSaveFile.dat");
+
+        Player newPlayer = SaveLoadManager.loadGame("testSaveFile.dat");
+        newPlayer.makeChoice(0);
+
+        Assertions.assertThat(newPlayer.getCurrentChoiceText()).isEqualTo("You detour away from your normal walk to work onto a street you've never been on before. In fact... you're certain this road wasn't here last time you walked through this way. You definitely need a coffee. As you get to the door you notice a sign in the window. \"Serving now, hot bean juice with milk\". Quirky... you think to yourself.");
+    }
 }

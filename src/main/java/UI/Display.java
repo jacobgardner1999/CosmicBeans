@@ -29,4 +29,16 @@ public class Display {
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
+
+    public void viewGamePage(Stage primaryStage, Player player) throws IOException, InterruptedException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gamePage.fxml"));
+        Parent root = fxmlLoader.load();
+
+        GamePageController controller = fxmlLoader.getController();
+        controller.setStage(primaryStage);
+        controller.setUpGameScreen(player);
+
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.show();
+    }
 }

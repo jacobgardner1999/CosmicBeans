@@ -1,6 +1,8 @@
 package Components;
 
-public class Traits {
+import java.io.Serializable;
+
+public class Traits implements Serializable {
     private Integer perception;
     private Integer hustle;
     private Integer charisma;

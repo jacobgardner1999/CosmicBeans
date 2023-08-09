@@ -1,7 +1,5 @@
 package UI;
 
-import Components.Game;
-import Components.Player;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

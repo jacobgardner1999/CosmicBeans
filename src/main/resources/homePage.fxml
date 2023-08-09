@@ -5,16 +5,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgb(71, 69, 67);"
-            stylesheets="styles.css" xmlns="http://javafx.com/javafx/20.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.HomePageController">
-    <Button fx:id="startButton" layoutX="350.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
-            text="Start Game"/>
-    <Button fx:id="exitButton" layoutX="350.0" layoutY="340.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Exit"/>
-    <Text styleClass="titleText" layoutX="246.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cosmic Beans">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgb(71, 69, 67);" stylesheets="styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.HomePageController">
+    <Button fx:id="startButton" layoutX="350.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="New Game" />
+    <Button fx:id="loadButton" layoutX="350.0" layoutY="334.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Continue" />
+    <Button fx:id="exitButton" layoutX="350.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Exit" />
+    <Text layoutX="246.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleText" text="Cosmic Beans">
         <font>
-          <Font size="48.0"/>
+          <Font size="48.0" />
         </font>
     </Text>
 </AnchorPane>

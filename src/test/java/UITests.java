@@ -10,7 +10,6 @@ import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 import java.io.IOException;
 
-
 public class UITests extends ApplicationTest {
     private Display display;
     private Stage primaryStage;
@@ -45,7 +44,7 @@ public class UITests extends ApplicationTest {
     public void checkStartButton() {
         Button startButton = lookup("#startButton").query();
 
-        Assertions.assertThat(startButton.getText()).isEqualTo("Start Game");
+        Assertions.assertThat(startButton.getText()).isEqualTo("New Game");
     }
 
     @Test
@@ -66,7 +65,6 @@ public class UITests extends ApplicationTest {
         Text mainText = lookup("#mainText").query();
         Assertions.assertThat(mainText.getText()).isEqualTo("You get out of bed and start to get ready for work. Jumping in the shower, you reach to grab a body wash from the pot stuck to your wall with plastic suckers. The two shower gels you own are labelled 'Invigorate for Men', promising to energise you for the day, and 'Allure', promising to make you irresistible to the people around you. ");
     }
-
     @Test
     public void checkInsufficientTraitOptionDisabled() {
         clickOn("#startButton");
@@ -74,7 +72,7 @@ public class UITests extends ApplicationTest {
         clickOn("#choiceButton0_0");
         sleep(500);
         clickOn("#choiceButton1_1");
-        sleep(200);
+        sleep(500);
         Button disabledButton = lookup("#choiceButton2_1").query();
 
         Assertions.assertThat(disabledButton.isDisabled()).isTrue();
@@ -86,7 +84,7 @@ public class UITests extends ApplicationTest {
         clickOn("#choiceButton0_0");
         sleep(500);
         clickOn("#choiceButton1_0");
-        sleep(200);
+        sleep(500);
         Button enabledButton = lookup("#choiceButton2_1").query();
 
         Assertions.assertThat(enabledButton.isDisabled()).isFalse();
@@ -102,7 +100,7 @@ public class UITests extends ApplicationTest {
         Assertions.assertThat(Integer.valueOf(hustle.getText())).isEqualTo(20);
 
         clickOn("#choiceButton1_0");
-
+        sleep(500);
         Assertions.assertThat(Integer.valueOf(hustle.getText())).isEqualTo(30);
     }
 }
