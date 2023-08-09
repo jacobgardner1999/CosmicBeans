@@ -1,9 +1,8 @@
 package UI;
 
-import Components.Game;
-import Components.Option;
-import Components.Traits;
+import Components.*;
 import javafx.animation.FillTransition;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -14,21 +13,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import Components.Player;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
 
 public class GamePageController {
-    private final StringProperty dynamicResultProperty = new SimpleStringProperty("Default Text");
-    private final StringProperty perceptionProperty = new SimpleStringProperty("000");
-    private final StringProperty hustleProperty = new SimpleStringProperty("000");
-    private final StringProperty charismaProperty = new SimpleStringProperty("000");
-    private final StringProperty snootinessProperty = new SimpleStringProperty("000");
+    private final StringProperty dynamicResultProperty = new SimpleStringProperty("");
+    private final StringProperty perceptionProperty = new SimpleStringProperty("20");
+    private final StringProperty hustleProperty = new SimpleStringProperty("20");
+    private final StringProperty charismaProperty = new SimpleStringProperty("20");
+    private final StringProperty snootinessProperty = new SimpleStringProperty("20");
 
     private final Display display = new Display();
     private Stage primaryStage;
-    private Game game;
     private Player player;
     private int[] index = new int[] {0, 0};
 
@@ -37,6 +39,8 @@ public class GamePageController {
     }
     @FXML
     private StackPane loadingOverlay;
+    @FXML
+    private StackPane savingOverlay;
     @FXML
     private Text mainText;
     @FXML
@@ -51,6 +55,8 @@ public class GamePageController {
     private Text snootinessDisplay;
     @FXML
     private Button homeButton;
+    @FXML
+    private Button saveButton;
     @FXML
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
@@ -89,11 +95,28 @@ public class GamePageController {
                 throw new RuntimeException(e);
             }
         });
+        saveButton.setOnAction(event -> {
+            savingOverlay.setVisible(true);
+            System.out.println("Saving...");
+
+            new Thread(() -> {
+                SaveLoadManager.saveGame(player, "saveFile.dat");
+
+                ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                executor.schedule(() -> {
+                    Platform.runLater(() -> {
+                        System.out.println("Save completed!");
+                        savingOverlay.setVisible(false);
+                    });
+                    executor.shutdown();
+                }, 1000, TimeUnit.MILLISECONDS);
+            }).start();
+        });
     }
 
     public void setUpGameScreen() {
         this.player = new Player();
-        this.game = new Game();
+        Game game = new Game();
 
         game.setupGame(player);
         new Thread(() -> {
@@ -103,7 +126,24 @@ public class GamePageController {
 
                     updateText(newText);
 
-                    Thread.sleep(500);
+                    sleep(500);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void setUpGameScreen(Player player) {
+        this.player = player;
+        new Thread(() -> {
+            try {
+                while (true) {
+                    String newText = player.getCurrentChoiceText();
+
+                    updateText(newText);
+
+                    sleep(500);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -118,7 +158,6 @@ public class GamePageController {
                 updateTraits();
                 generateButtons();
                 loadingOverlay.setVisible(false);
-                System.out.println();
             }
         });
     }
@@ -171,10 +210,6 @@ public class GamePageController {
         FillTransition fillTransition = new FillTransition(duration, textNode, startColor, endColor);
         fillTransition.setOnFinished(event -> textNode.setFill(endColor));
         fillTransition.play();
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public void setStage(Stage primaryStage) { this.primaryStage = primaryStage; }

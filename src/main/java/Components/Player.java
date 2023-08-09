@@ -2,7 +2,11 @@ package Components;
 
 import Helpers.InsufficientTraitException;
 
-public class Player {
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private Choice currentChoice;
     private final Traits playerTraits;
 

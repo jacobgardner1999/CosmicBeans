@@ -1,9 +1,10 @@
 package Components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Choice {
+public class Choice implements Serializable {
     private final String choiceText;
     private final List<Option> optionsList;
 

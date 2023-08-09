@@ -6,14 +6,15 @@ import javafx.stage.Stage;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 import java.io.IOException;
 
-
 public class UITests extends ApplicationTest {
     private Display display;
     private Stage primaryStage;
+    private final FxRobot robot = new FxRobot();
 
     @Override
     public void start(Stage primaryStage) {
@@ -66,7 +67,6 @@ public class UITests extends ApplicationTest {
         Text mainText = lookup("#mainText").query();
         Assertions.assertThat(mainText.getText()).isEqualTo("You get out of bed and start to get ready for work. Jumping in the shower, you reach to grab a body wash from the pot stuck to your wall with plastic suckers. The two shower gels you own are labelled 'Invigorate for Men', promising to energise you for the day, and 'Allure', promising to make you irresistible to the people around you. ");
     }
-
     @Test
     public void checkInsufficientTraitOptionDisabled() {
         clickOn("#startButton");
