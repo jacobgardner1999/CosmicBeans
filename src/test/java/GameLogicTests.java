@@ -1,39 +1,33 @@
-package Tests;
-
 import Components.*;
 import Helpers.InsufficientTraitException;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-
-public class PlayerTests {
+public class GameLogicTests {
 
     @Test
-    public void StartGameInstance() {
+    public void startGameInstance() {
         Game game = new Game();
         Player player = new Player();
         game.setupGame(player);
 
         String choiceText = "Your alarm blares. 6:25am.";
-        assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
+        Assertions.assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
     @Test
-    public void PlayerGivenNewChoiceOnMakeChoice() {
+    public void playerGivenNewChoiceOnMakeChoice() {
         Game game = new Game();
         Player player = new Player();
         game.setupGame(player);
         player.makeChoice(0);
 
         String choiceText = "You get out of bed and start to get ready for work. Jumping in the shower, you reach to grab a body wash from the pot stuck to your wall with plastic suckers. The two shower gels you own are labelled 'Invigorate for Men', promising to energise you for the day, and 'Allure', promising to make you irresistible to the people around you. ";
-        assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
+        Assertions.assertThat(player.getCurrentChoice().getChoiceText()).isEqualTo(choiceText);
     }
 
     @Test
-    public void ChoiceUpdatesPlayerTrait() {
+    public void choiceUpdatesPlayerTrait() {
         Game game = new Game();
         Player player = new Player();
         OptionFactory factory = new OptionFactory();
@@ -45,14 +39,14 @@ public class PlayerTests {
 
         game.giveChoice(player, choice);
         player.makeChoice(0);
-        assertThat(player.getPlayerTraits().getPerception()).isEqualTo(25);
-        assertThat(player.getPlayerTraits().getHustle()).isEqualTo(30);
-        assertThat(player.getPlayerTraits().getCharisma()).isEqualTo(25);
-        assertThat(player.getPlayerTraits().getSnootiness()).isEqualTo(20);
+        Assertions.assertThat(player.getPlayerTraits().getPerception()).isEqualTo(25);
+        Assertions.assertThat(player.getPlayerTraits().getHustle()).isEqualTo(30);
+        Assertions.assertThat(player.getPlayerTraits().getCharisma()).isEqualTo(25);
+        Assertions.assertThat(player.getPlayerTraits().getSnootiness()).isEqualTo(20);
     }
 
     @Test
-    public void OptionNotAvailableBasedOnPlayerTrait() {
+    public void optionNotAvailableBasedOnPlayerTrait() {
         Game game = new Game();
         OptionFactory factory = new OptionFactory();
         ChoiceFactory choiceFactory = new ChoiceFactory();
@@ -67,13 +61,13 @@ public class PlayerTests {
 
         game.giveChoice(player, choice);
 
-        assertThatExceptionOfType(InsufficientTraitException.class)
+        Assertions.assertThatExceptionOfType(InsufficientTraitException.class)
                 .isThrownBy(() -> player.makeChoice(0))
                 .withMessage("Insufficient trait value.");
     }
 
     @Test
-    public void PlayerMakesChoiceWithMultipleRequirements() {
+    public void playerMakesChoiceWithMultipleRequirements() {
         Game game = new Game();
         OptionFactory factory = new OptionFactory();
         ChoiceFactory choiceFactory = new ChoiceFactory();
@@ -89,7 +83,23 @@ public class PlayerTests {
         game.giveChoice(player, choice);
         player.makeChoice(0);
 
-        assertThat(player.getCurrentChoiceText()).isEqualTo("Expected result");
+        Assertions.assertThat(player.getCurrentChoiceText()).isEqualTo("Expected result");
     }
 
+    @Test
+    public void saveGameState() {
+        Game game = new Game();
+        Player player = new Player();
+        game.setupGame(player);
+
+        player.makeChoice(0);
+        player.makeChoice(1);
+
+        SaveLoadManager.saveGame(player, "testSaveFile.dat");
+
+        Player newPlayer = SaveLoadManager.loadGame("testSaveFile.dat");
+        newPlayer.makeChoice(0);
+
+        Assertions.assertThat(newPlayer.getCurrentChoiceText()).isEqualTo("You detour away from your normal walk to work onto a street you've never been on before. In fact... you're certain this road wasn't here last time you walked through this way. You definitely need a coffee. As you get to the door you notice a sign in the window. \"Serving now, hot bean juice with milk\". Quirky... you think to yourself.");
+    }
 }

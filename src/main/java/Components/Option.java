@@ -1,6 +1,8 @@
 package Components;
 
-public class Option {
+import java.io.Serializable;
+
+public class Option implements Serializable {
     private final String optionText;
     public Choice choiceDestination;
     public Traits traitScore;
