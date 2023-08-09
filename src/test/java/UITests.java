@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.io.IOException;
 public class UITests extends ApplicationTest {
     private Display display;
     private Stage primaryStage;
-    private final FxRobot robot = new FxRobot();
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,7 +44,7 @@ public class UITests extends ApplicationTest {
     public void checkStartButton() {
         Button startButton = lookup("#startButton").query();
 
-        Assertions.assertThat(startButton.getText()).isEqualTo("Start Game");
+        Assertions.assertThat(startButton.getText()).isEqualTo("New Game");
     }
 
     @Test
@@ -74,7 +72,7 @@ public class UITests extends ApplicationTest {
         clickOn("#choiceButton0_0");
         sleep(500);
         clickOn("#choiceButton1_1");
-        sleep(200);
+        sleep(500);
         Button disabledButton = lookup("#choiceButton2_1").query();
 
         Assertions.assertThat(disabledButton.isDisabled()).isTrue();
@@ -86,7 +84,7 @@ public class UITests extends ApplicationTest {
         clickOn("#choiceButton0_0");
         sleep(500);
         clickOn("#choiceButton1_0");
-        sleep(200);
+        sleep(500);
         Button enabledButton = lookup("#choiceButton2_1").query();
 
         Assertions.assertThat(enabledButton.isDisabled()).isFalse();
@@ -102,7 +100,7 @@ public class UITests extends ApplicationTest {
         Assertions.assertThat(Integer.valueOf(hustle.getText())).isEqualTo(20);
 
         clickOn("#choiceButton1_0");
-
+        sleep(500);
         Assertions.assertThat(Integer.valueOf(hustle.getText())).isEqualTo(30);
     }
 }
