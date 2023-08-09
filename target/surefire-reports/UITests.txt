@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: UITests
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.758 s -- in UITests
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.00 s -- in UITests

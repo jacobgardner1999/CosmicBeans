@@ -1,5 +1,6 @@
 package UI;
 
+import Components.Game;
 import Components.Option;
 import Components.Traits;
 import javafx.animation.FillTransition;
@@ -11,9 +12,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import Components.Player;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class GamePageController {
@@ -23,6 +26,9 @@ public class GamePageController {
     private final StringProperty charismaProperty = new SimpleStringProperty("000");
     private final StringProperty snootinessProperty = new SimpleStringProperty("000");
 
+    private final Display display = new Display();
+    private Stage primaryStage;
+    private Game game;
     private Player player;
     private int[] index = new int[] {0, 0};
 
@@ -43,6 +49,8 @@ public class GamePageController {
     private Text charismaDisplay;
     @FXML
     private Text snootinessDisplay;
+    @FXML
+    private Button homeButton;
     @FXML
     private void initialize() {
         mainText.textProperty().bind(dynamicResultProperty);
@@ -74,9 +82,20 @@ public class GamePageController {
             if(Integer.parseInt(oldValue) < Integer.parseInt(newValue)) { updateAnimation(snootinessDisplay, Color.GREEN);}
             else { updateAnimation(snootinessDisplay, Color.RED);}
         });
+        homeButton.setOnAction(event -> {
+            try {
+                display.viewHomePage(primaryStage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void setUpGameScreen() {
+        this.player = new Player();
+        this.game = new Game();
+
+        game.setupGame(player);
         new Thread(() -> {
             try {
                 while (true) {
@@ -129,7 +148,7 @@ public class GamePageController {
                     player.makeChoice(optionIndex);
                 }
                 else {
-                    System.out.println("Button option index out of bounds.");;
+                    System.out.println("Button option index out of bounds.");
                 }
             });
             index[1]++;
@@ -157,5 +176,7 @@ public class GamePageController {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public void setStage(Stage primaryStage) { this.primaryStage = primaryStage; }
 }
 

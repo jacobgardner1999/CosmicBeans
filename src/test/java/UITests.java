@@ -1,5 +1,3 @@
-import Components.Game;
-import Components.Player;
 import UI.Display;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
@@ -15,22 +13,17 @@ import java.io.IOException;
 
 public class UITests extends ApplicationTest {
     private Display display;
-    private Player player;
     private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         display = new Display();
-        Game game = new Game();
-        player = new Player();
-
-        game.setupGame(player);
 
         primaryStage.setTitle("Cosmic Beans DEV TEST");
         Platform.runLater(() -> {
             try {
-                display.viewHomePage(primaryStage, player);
+                display.viewHomePage(primaryStage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -41,7 +34,7 @@ public class UITests extends ApplicationTest {
     public void tearDown() {
         Platform.runLater(() -> {
             try {
-                display.viewHomePage(primaryStage, player);
+                display.viewHomePage(primaryStage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -79,7 +72,7 @@ public class UITests extends ApplicationTest {
         clickOn("#startButton");
         sleep(100);
         clickOn("#choiceButton0_0");
-        sleep(400);
+        sleep(500);
         clickOn("#choiceButton1_1");
         sleep(200);
         Button disabledButton = lookup("#choiceButton2_1").query();
@@ -91,7 +84,7 @@ public class UITests extends ApplicationTest {
         clickOn("#startButton");
         sleep(100);
         clickOn("#choiceButton0_0");
-        sleep(400);
+        sleep(500);
         clickOn("#choiceButton1_0");
         sleep(200);
         Button enabledButton = lookup("#choiceButton2_1").query();
@@ -103,7 +96,7 @@ public class UITests extends ApplicationTest {
         clickOn("#startButton");
         sleep(100);
         clickOn("#choiceButton0_0");
-        sleep(400);
+        sleep(500);
         Text hustle = lookup("#hustleDisplay").query();
 
         Assertions.assertThat(Integer.valueOf(hustle.getText())).isEqualTo(20);
