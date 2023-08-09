@@ -5,6 +5,7 @@ import Components.SaveLoadManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
