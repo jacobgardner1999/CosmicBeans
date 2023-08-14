@@ -3,6 +3,9 @@ import Helpers.InsufficientTraitException;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameLogicTests {
 
     @Test
@@ -101,5 +104,24 @@ public class GameLogicTests {
         newPlayer.makeChoice(0);
 
         Assertions.assertThat(newPlayer.getCurrentChoiceText()).isEqualTo("You detour away from your normal walk to work onto a street you've never been on before. In fact... you're certain this road wasn't here last time you walked through this way. You definitely need a coffee. As you get to the door you notice a sign in the window. \"Serving now, hot bean juice with milk\". Quirky... you think to yourself.");
+    }
+
+    @Test
+    public void updatePlayerMemory() {
+        Game game = new Game();
+        Player player = new Player();
+        game.setupGame(player);
+
+        player.makeChoice(0);
+        List<String> expected = new ArrayList<>();
+        expected.add("0_0");
+        Assertions.assertThat(player.getChoiceMemory()).isEqualTo(expected);
+
+        player.makeChoice(1);
+        expected.add("1_0");
+        player.makeChoice(0);
+        expected.add("2_0");
+
+        Assertions.assertThat(player.getChoiceMemory()).isEqualTo(expected);
     }
 }
