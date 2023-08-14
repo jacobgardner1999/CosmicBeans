@@ -32,7 +32,7 @@ public class GamePageController {
     private final Display display = new Display();
     private Stage primaryStage;
     private Player player;
-    private int[] index = new int[] {0, 0};
+    private final int[] index = new int[] {0, 0};
 
 
     public GamePageController() {
