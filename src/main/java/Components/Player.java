@@ -1,14 +1,14 @@
 package Components;
 
 import Helpers.InsufficientTraitException;
-
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Serializable {
     private Choice currentChoice;
     private final Traits playerTraits;
+    private final List<String> choiceMemory = new ArrayList<>();
 
     public Player(Traits playerTraits) {
         this.playerTraits = playerTraits;
@@ -30,6 +30,7 @@ public class Player implements Serializable {
     public void makeChoice(int optionIndex) {
         Option option = currentChoice.getOption(optionIndex);
         if(option.traitRequirement.isLessThan(playerTraits)) {
+            choiceMemory.add(currentChoice.getId());
             currentChoice = option.choiceDestination;
             updateTraits(option.traitScore);
         }
@@ -41,7 +42,12 @@ public class Player implements Serializable {
         return playerTraits;
     }
 
+    public List<String> getChoiceMemory() {
+        return choiceMemory;
+    }
+
     private void updateTraits(Traits traitScore) {
         playerTraits.updateTraits(traitScore);
     }
+
 }
