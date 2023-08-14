@@ -103,7 +103,7 @@ public class GameLogicTests {
         Player newPlayer = SaveLoadManager.loadGame("testSaveFile.dat");
         newPlayer.makeChoice(0);
 
-        Assertions.assertThat(newPlayer.getCurrentChoiceText()).isEqualTo("You detour away from your normal walk to work onto a street you've never been on before. In fact... you're certain this road wasn't here last time you walked through this way. You definitely need a coffee. As you get to the door you notice a sign in the window. \"Serving now, hot bean juice with milk\". Quirky... you think to yourself.");
+        Assertions.assertThat(newPlayer.getCurrentChoiceText()).isEqualTo("You detour away from your normal walk to work onto a street you've never been on before. In fact... you're certain this road wasn't here last time you walked through this way. You definitely need a coffee. You stroll past the freshly painted blackboard placed on the pavement, it reads 'Cosmic Beans'.  As you get to the door you notice a sign in the window. \"Serving now, hot bean juice with milk\". Quirky... you think to yourself.");
     }
 
     @Test
